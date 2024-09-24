@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "noreposts",
+  "version": "${version}",
+  "name": "NoReposts",
+  "description": "A configurable library aimed to help keep websites aware of your licenses",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/noreposts/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "preLaunch": [
+      "com.mrbreaknfix.noreposts.Noreposts"
+    ]
+  },
+  "mixins": [
+    "noreposts.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
