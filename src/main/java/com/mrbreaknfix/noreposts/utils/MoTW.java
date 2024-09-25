@@ -38,7 +38,7 @@ public class MoTW {
         return referrerUrl;
     }
 
-    public static MoTW of(File file) throws IllegalArgumentException {
+    public static MoTW from(File file) throws IllegalArgumentException {
         if (!file.exists()) {
             throw new IllegalArgumentException("File doesn't exist.");
         }

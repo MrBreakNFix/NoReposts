@@ -46,7 +46,7 @@ public class NoReposts implements PreLaunchEntrypoint {
 
                         // Matches sites
                             try {
-                                String fromSite = ADSCheck.matchFileOriginWithRegex(modPath.toFile(), origins);
+                                String fromSite = ADSCheck.getMatchingOriginFromRegex(modPath.toFile(), origins);
                                 if (fromSite == null) {
                                     System.out.println("Mod " + metadata.getName() + " was not downloaded from a listed site. Under normal conditions this message should not be visible.");
                                     return;
