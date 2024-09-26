@@ -58,7 +58,7 @@ public class MoTW {
             String hostUrl = null;
             String referrerUrl = null;
 
-            System.out.println("Content of Zone.Identifier:");
+//            System.out.println("Content of Zone.Identifier:");
 
             while ((line = streamFile.readLine()) != null) {
                 String content = new String(line.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);

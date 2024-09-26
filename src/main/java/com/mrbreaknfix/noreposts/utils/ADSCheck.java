@@ -1,6 +1,11 @@
 package com.mrbreaknfix.noreposts.utils;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import oshi.util.tuples.Pair;
+
 import java.io.File;
+import java.util.List;
 
 public class ADSCheck {
     /**
@@ -44,7 +49,6 @@ public class ADSCheck {
      * </p>
      */
     public static String getMatchingOriginFromRegex(File file, String... regex) throws IllegalArgumentException {
-
         if (!file.exists()) {
             throw new IllegalArgumentException("File doesn't exist.");
         }
@@ -63,7 +67,40 @@ public class ADSCheck {
                 return hostUrl;
             }
         }
-        return null;
-
+        throw new IllegalArgumentException("No matching origin found.");
     }
+
+    public static String getFromSite(File file) throws IllegalArgumentException {
+        if (!file.exists()) {
+            throw new IllegalArgumentException("File doesn't exist.");
+        }
+
+        MoTW motw = MoTW.from(file);
+
+        String referrerUrl = motw != null ? motw.getReferrerUrl() : null;
+        String hostUrl = motw != null ? motw.getHostUrl() : null;
+
+        if (referrerUrl != null) {
+            return referrerUrl;
+        }
+
+        if (hostUrl != null) {
+            return hostUrl;
+        }
+
+        throw new IllegalArgumentException("No matching origin found.");
+    }
+
+public static List<String> getSites(File file) throws IllegalArgumentException {
+    if (!file.exists()) {
+        throw new IllegalArgumentException("File doesn't exist.");
+    }
+
+    MoTW motw = MoTW.from(file);
+
+    String referrerUrl = motw != null ? motw.getReferrerUrl() : null;
+    String hostUrl = motw != null ? motw.getHostUrl() : null;
+
+    return List.of(referrerUrl, hostUrl);
+}
 }
