@@ -5,12 +5,20 @@ public class OsUtils {
     private static final String OS = System.getProperty("os.name").toLowerCase();
 
     /**
-     * Get the name of the operating system.
+     * Get the operating system name.
      *
-     * @return the name of the operating system
+     * @return the operating system name
      */
-    public static String getOsName() {
-        return OS;
+    public static String getOs() {
+        if (isWindows()) {
+            return "Windows";
+        } else if (isMac()) {
+            return "macOS";
+        } else if (isLinux()) {
+            return "Linux";
+        } else {
+            return OS;
+        }
     }
 
     /**

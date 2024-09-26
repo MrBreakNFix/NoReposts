@@ -1,10 +1,7 @@
 package com.mrbreaknfix.noreposts.utils;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import oshi.util.tuples.Pair;
-
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ADSCheck {
@@ -91,16 +88,24 @@ public class ADSCheck {
         throw new IllegalArgumentException("No matching origin found.");
     }
 
-public static List<String> getSites(File file) throws IllegalArgumentException {
-    if (!file.exists()) {
-        throw new IllegalArgumentException("File doesn't exist.");
+    public static List<String> getSites(File file) throws IllegalArgumentException {
+        if (!file.exists()) {
+            throw new IllegalArgumentException("File doesn't exist.");
+        }
+
+        MoTW motw = MoTW.from(file);
+
+        String referrerUrl = motw != null ? motw.getReferrerUrl() : null;
+        String hostUrl = motw != null ? motw.getHostUrl() : null;
+
+        List<String> sites = new ArrayList<>();
+        if (referrerUrl != null) {
+            sites.add(referrerUrl);
+        }
+        if (hostUrl != null) {
+            sites.add(hostUrl);
+        }
+
+        return sites;
     }
-
-    MoTW motw = MoTW.from(file);
-
-    String referrerUrl = motw != null ? motw.getReferrerUrl() : null;
-    String hostUrl = motw != null ? motw.getHostUrl() : null;
-
-    return List.of(referrerUrl, hostUrl);
-}
 }
