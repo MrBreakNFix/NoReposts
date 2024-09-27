@@ -18,6 +18,8 @@ import static com.mrbreaknfix.noreposts.utils.IncompliantMod.addIncompliantMod;
 public class NoReposts implements PreLaunchEntrypoint {
     public static IncompliantMod[] IncompliantMods = null;
     public static Logger LOGGER = LoggerFactory.getLogger("NoReposts");
+    public static boolean canHidePopup = true;
+    public static boolean shouldShowPopup = false;
     //todo: Add a hide for this mod option on the popup.
     // add a menu showing all incompliant mods, their reasons, and a link to fix them
 
@@ -41,7 +43,7 @@ public class NoReposts implements PreLaunchEntrypoint {
                 // Get mod path
                 Path modPath = mod.getOrigin().getPaths().getFirst();
 
-                // Read noreposts config, if present
+                // Read NoReposts config, if present
                 Config config = new Config(metadata);
 
 
@@ -64,6 +66,8 @@ public class NoReposts implements PreLaunchEntrypoint {
                                         LOGGER.debug("Developer information: " + Arrays.toString(config.getBlacklistedOrigins()));
 
                                         addIncompliantMod(new IncompliantMod(metadata, REASON.BLACKLISTED_ORIGIN));
+                                        canHidePopup = false;
+                                        shouldShowPopup = true;
                                         // skip checking for allowed origins, as it is blacklisted
                                         return;
                                     }
@@ -80,9 +84,10 @@ public class NoReposts implements PreLaunchEntrypoint {
                                         break;
                                     } else {
                                         LOGGER.warn("Mod " + metadata.getName() + " was not downloaded from an allowed site: " + fromSite);
-                                        LOGGER.debug("Developer information: " + Arrays.toString(config.getAllowedOrigins()));
-
                                         addIncompliantMod(new IncompliantMod(metadata, REASON.INCORRECT_ORIGIN));
+                                        // we allow the popup to be hidden in this case, because its not blacklisted, but it is incorrect;
+                                         // could have just been sending it to a friend or something
+                                        shouldShowPopup = true;
                                     }
                                 }
                             }
@@ -109,6 +114,8 @@ public class NoReposts implements PreLaunchEntrypoint {
                         if (fileName.matches(disallowedName)) {
                             LOGGER.warn("Mod " + metadata.getName() + " has an incorrect name: " + fileName);
                             addIncompliantMod(new IncompliantMod(metadata, REASON.INCORRECT_NAME));
+                            canHidePopup = false;
+                            shouldShowPopup = true;
                         } else {
                             LOGGER.debug("Mod " + metadata.getName() + " has a correct name: " + fileName);
                         }
@@ -132,7 +139,6 @@ public class NoReposts implements PreLaunchEntrypoint {
                         break;
                     case BLACKLISTED_ORIGIN:
                         LOGGER.warn(config.getBlacklistedOriginMessage());
-                        System.exit(1);
                         break;
                 }
             }

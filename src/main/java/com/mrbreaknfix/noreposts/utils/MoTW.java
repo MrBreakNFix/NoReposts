@@ -58,8 +58,6 @@ public class MoTW {
             String hostUrl = null;
             String referrerUrl = null;
 
-//            System.out.println("Content of Zone.Identifier:");
-
             while ((line = streamFile.readLine()) != null) {
                 String content = new String(line.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
                 // set the ZoneId
@@ -76,7 +74,6 @@ public class MoTW {
                 }
 //                System.out.println(content);
             }
-
             return new MoTW(zoneId, hostUrl, referrerUrl);
         } catch (IOException e) {
             System.out.println("Error reading the Zone.Identifier ADS: " + e.getMessage());

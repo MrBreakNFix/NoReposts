@@ -128,6 +128,19 @@ public class Config {
         return blacklistedOriginMessage;
     }
 
+    /**
+     * Get the message for a given reason, if not present in config, default message will be returned
+     * @param reason From REASON enum
+     * @return The message to be displayed
+     */
+    public String getReasonMessage(REASON reason) {
+        return switch (reason) {
+            case INCORRECT_NAME -> incorrectNameMessage;
+            case INCORRECT_ORIGIN -> incorrectOriginMessage;
+            case BLACKLISTED_ORIGIN -> blacklistedOriginMessage;
+        };
+    }
+
     public String getIncorrectNameMessage() {
         return incorrectNameMessage;
     }
