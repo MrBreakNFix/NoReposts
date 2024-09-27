@@ -99,8 +99,6 @@ public class NoReposts implements PreLaunchEntrypoint {
                     } catch (IllegalArgumentException e) {
                         // Does not have MoTW, user could have unblocked file, or just default mod, or not downloaded from internet. Fails silently.
                     }
-                } else {
-                    LOGGER.warn("Origin check is not supported on " + OsUtils.getOs());
                 }
 
                 // Check for incorrect file name
@@ -123,6 +121,10 @@ public class NoReposts implements PreLaunchEntrypoint {
                 }
 
             });
+
+        if(!OsUtils.isWindows()) {
+            LOGGER.warn("Origin check is not supported on " + OsUtils.getOs());
+        }
 
         if (IncompliantMods != null) {
             // List all the mods that are incompliant

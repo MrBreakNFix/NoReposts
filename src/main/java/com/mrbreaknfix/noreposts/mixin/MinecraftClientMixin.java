@@ -24,6 +24,7 @@ public abstract class MinecraftClientMixin {
                 LOGGER.info("Showing popup");
             } else {
                 LOGGER.info("Not showing popup");
+                instance.currentScreen = screen;
             }
         } else {
             instance.currentScreen = screen;

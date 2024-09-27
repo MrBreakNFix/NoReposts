@@ -1,0 +1,15 @@
+By running ./gradlew publishToMavenLocal, the mod is published to
+~/.m2/repository/com/mrbreaknfix/NoReposts/{version}/NoReposts-{version}.jar
+and then you upload it to the maven server.
+open with ```dolphin ~/.m2/repository/com/mrbreaknfix/NoReposts/```
+and drag in whole folder
+
+and can be used as a dependency in other projects like this:
+in repositories add
+
+maven {
+    url 'https://maven.mrbreaknfix.com/'
+}
+
+and now you can add the dependency like this:
+implementation 'com.mrbreaknfix:NoReposts:1.0.0'
