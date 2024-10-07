@@ -27,7 +27,7 @@ Defaults for incorrect / blacklisted origin messages have defaults, but allow yo
         "ex: .modrinth.* in base 64 is: Lm1vZHJpbnRoLio=, which would be put here"
     ],
     "noreposts:disallowedNamesB64Reg": [
-        "Base 64 encoded regex of- disallowed file names, ex 9minecraft usally contains "Mod" in the name, so we can block it"
+        "Base 64 encoded regex of- disallowed file names, ex 9minecraft usally contains 'Mod' in the name, so we can block it"
     ],
     "noreposts:blacklistedOriginsB64Reg": [
         "Base 64 encoded regex of specific origins to block, ex: .9minecraft.* which cannot trigger by mistake"
