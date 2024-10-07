@@ -17,11 +17,9 @@ public class Config {
     public Config(ModMetadata metadata) {
         this.meta = metadata;
 
-        CustomValue officialOriginValue = metadata.getCustomValue("noreposts:officialOriginB64Reg");
+        CustomValue officialOriginValue = metadata.getCustomValue("noreposts:officialOrigin");
         if (officialOriginValue != null) {
-            String officialOrigin = officialOriginValue.getAsString();
-            // decode base 64
-            this.officialOrigin = new String(java.util.Base64.getDecoder().decode(officialOrigin));
+            this.officialOrigin = officialOriginValue.getAsString();
         } else {
             this.officialOrigin = null;
         }
